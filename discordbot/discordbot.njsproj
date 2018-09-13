@@ -28,9 +28,11 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app.js" />
     <Compile Include="_main.js" />
     <Content Include="Bot.bat" />
+    <Content Include="config.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
