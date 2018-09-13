@@ -1,0 +1,9 @@
+{
+  "name": "discordbot",
+  "version": "0.0.0",
+  "description": "discordbot",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}
