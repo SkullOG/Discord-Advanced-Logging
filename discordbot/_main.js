@@ -12,25 +12,25 @@ client.on('messageDelete', (message) => {
     message.guild.createChannel('logs', 'text');
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
-    console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
+      console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
   }  
     logs.send('',
         {
-            embed:
+            "embed":
             {
-                color: 0x921515,
-                fields:
+                "color": 0x921515,
+                "fields":
                 [{
-                    name: "Member",
-                    value: message.author
+                    "name": "Member",
+                    "value": message.author
                 },
                 {
-                    name: "Channel",
-                    value: message.channel
+                    "name": "Channel",
+                    "value": message.channel
                 },
                 {
-                    name: "Message",
-                    value: message.content
+                    "name": "Message",
+                    "value": message.content
                 }]
             }
         })
@@ -45,25 +45,6 @@ client.on('messageDelete', (message) => {
     client.on("debug", (e) => {
         console.info(e);
     });
-})
-
-client.on('message', (message) =>
-{
-    if (message.content === "!1")
-    {
-        message.channel.send('',
-        {
-            embed:
-            {
-                color: 0x921515,
-                title: 'Message removed \n \nMember                   Channel',
-                description: '${message.author}'
-                
-            },
-        }).then(console.log).catch(console.error);
-    }
-
-
 })
 
 client.login(botToken)
