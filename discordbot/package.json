@@ -5,5 +5,9 @@
   "main": "app.js",
   "author": {
     "name": ""
+  },
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "moment": "^2.22.2"
   }
 }
