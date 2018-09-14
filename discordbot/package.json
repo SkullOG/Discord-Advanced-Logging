@@ -4,7 +4,7 @@
   "description": "discordbot",
   "main": "app.js",
   "author": {
-    "name": ""
+    "name": "SkullOG"
   },
   "dependencies": {
     "discord.js": "^11.4.2",

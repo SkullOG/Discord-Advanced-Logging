@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const moment = require('moment');
 const client = new Discord.Client();
-const { botToken } = require('./config.json');
+const { botToken } = require('./edit.json');
 
 client.on('ready', () => {
     console.log('Ready!');
@@ -147,5 +147,7 @@ client.on('messageUpdate', (eold, enew) => {
     }
     logs.send(embed)
 })
+
+
 
 client.login(botToken)
