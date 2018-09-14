@@ -148,6 +148,34 @@ client.on('messageUpdate', (eold, enew) => {
     logs.send(embed)
 })
 
+client.on('guildMemberUpdate', (ous, nus) => {
+    console.log(ous)
+    const date = new Date()
+    const logs = ous.guild.channels.find('name', 'logs');
+
+    const embed = {
+        "embed": {
+            "color": 0x1674ae,
+            "title": `Name Changed`,
+            'fields': [
+                {
+                    'name': 'Old Name',
+                    'value': `${ous.nickname || ous.user.username}`,
+                    'inline': true
+                },
+                {
+                    'name': 'New Name',
+                    'value': `${nus.nickname || nus.user.username}`,
+                    'inline': true
+                },
+            ],
+            footer: {
+                'text': `${moment(date).format('DD-MM-Y hh:mm:ss A')}`
+            }
+        }
+    }
+    logs.send(embed)
+})
 
 
 client.login(botToken)
