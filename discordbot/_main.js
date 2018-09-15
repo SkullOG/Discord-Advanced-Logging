@@ -8,9 +8,10 @@ client.on('ready', () => {
 });
 
 client.on('messageDelete', message => {
-  const logs = message.guild.channels.find('name', 'logs');
+    const date = new Date()
+    console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${message.guild.name}] User ${message.author.tag} has been deleted`)
+    const logs = message.guild.channels.find(x => x.name === "logs");
   if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
-    message.guild.createChannel('logs', 'text');
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
       console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
@@ -67,9 +68,9 @@ logs.send(embed)
 })
 
 client.on('guildMemberAdd', join => {
-    console.log(join.user)
     const date = new Date()
-    const logs = join.guild.channels.find('name', 'logs');
+    console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${join.guild.name}] User ${join.user.tag} has joined the server.`)
+    const logs = join.guild.channels.find(x => x.name === "logs");
 
     const embed = {
         "embed": {
@@ -89,9 +90,9 @@ client.on('guildMemberAdd', join => {
 })
 
 client.on('guildMemberRemove', leave => {
-    console.log(leave.user)
     const date = new Date()
-    const logs = leave.guild.channels.find('name', 'logs');
+    console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${leave.guild.name}] User ${leave.user.tag} has left the server.`)
+    const logs = leave.guild.channels.find(x => x.name === "logs");
 
     const embed = {
         "embed": {
@@ -112,9 +113,9 @@ client.on('guildMemberRemove', leave => {
 
 client.on('messageUpdate', (eold, enew) => {
     if (enew.author.username === client.user.username) return
-    console.log(enew)
     const date = new Date()
-    const logs = enew.guild.channels.find('name', 'logs');
+    console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${eold.guild.name}] User ${eold.author.tag} has uptaded their message.`)
+    const logs = enew.guild.channels.find(x => x.name === "logs");
 
     const embed = {
         "embed": {
@@ -149,9 +150,12 @@ client.on('messageUpdate', (eold, enew) => {
 })
 
 client.on('guildMemberUpdate', (ous, nus) => {
-    console.log(ous)
+    const oldNick = ous.nickname || ous.user.username
+    const newNick = nus.nickname || nus.user.username
+    if (oldNick === newNick) return
     const date = new Date()
-    const logs = ous.guild.channels.find('name', 'logs');
+    console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${nus.guild.name}] User ${nus.user.tag} has changed their nickname.`)
+    const logs = ous.guild.channels.find(x => x.name === "logs");
 
     const embed = {
         "embed": {
@@ -160,12 +164,12 @@ client.on('guildMemberUpdate', (ous, nus) => {
             'fields': [
                 {
                     'name': 'Old Name',
-                    'value': `${ous.nickname || ous.user.username}`,
+                    'value': `${oldNick}`,
                     'inline': true
                 },
                 {
                     'name': 'New Name',
-                    'value': `${nus.nickname || nus.user.username}`,
+                    'value': `${newNick}`,
                     'inline': true
                 },
             ],
