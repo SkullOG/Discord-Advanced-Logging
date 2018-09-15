@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const moment = require('moment');
 const client = new Discord.Client();
-const { botToken } = require('./edit.json');
+const { botToken } = require('./config.json');
 
 client.on('ready', () => {
     console.log('Ready!');
@@ -11,7 +11,8 @@ client.on('messageDelete', message => {
     const date = new Date()
     console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${message.guild.name}] User ${message.author.tag} has been deleted`)
     const logs = message.guild.channels.find(x => x.name === "logs");
-  if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
+    if (message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) {
+    if (message.author.bot) return
   }
   if (!message.guild.me.hasPermission('MANAGE_CHANNELS') && !logs) { 
       console.log('The logs channel does not exist and tried to create the channel but I am lacking permissions')
@@ -71,6 +72,7 @@ client.on('guildMemberAdd', join => {
     const date = new Date()
     console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${join.guild.name}] User ${join.user.tag} has joined the server.`)
     const logs = join.guild.channels.find(x => x.name === "logs");
+    if (join.author.bot) return
 
     const embed = {
         "embed": {
@@ -93,6 +95,7 @@ client.on('guildMemberRemove', leave => {
     const date = new Date()
     console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${leave.guild.name}] User ${leave.user.tag} has left the server.`)
     const logs = leave.guild.channels.find(x => x.name === "logs");
+    if (leave.author.bot) return
 
     const embed = {
         "embed": {
@@ -116,6 +119,7 @@ client.on('messageUpdate', (eold, enew) => {
     const date = new Date()
     console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${eold.guild.name}] User ${eold.author.tag} has uptaded their message.`)
     const logs = enew.guild.channels.find(x => x.name === "logs");
+    if (eold.author.bot) return
 
     const embed = {
         "embed": {
@@ -156,6 +160,7 @@ client.on('guildMemberUpdate', (ous, nus) => {
     const date = new Date()
     console.log(`[${moment(date).format('DD-MM-Y hh:mm: A')}][${nus.guild.name}] User ${nus.user.tag} has changed their nickname.`)
     const logs = ous.guild.channels.find(x => x.name === "logs");
+    if (ous.author.bot) return
 
     const embed = {
         "embed": {
